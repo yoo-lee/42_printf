@@ -1,46 +1,50 @@
-int ft_printf(const char *fmt, ...)
-
 #include "ft_printf.h"
 
-static size_t	ft_flags(const char *format,
-	va_list *ap, size_t write_len)
+static int	ft_flags(const char *ptr, va_list ap)
 {
-	if (*format == 'c')
-		write_len = ft_printf_c(ap, write_len);
-	else if (*format == 's')
-		write_len = ft_printf_s(ap, write_len);
-	else if (*format == 'p')
-		write_len = ft_printf_p(ap, write_len);
-	else if (*format == 'd' || *format == 'i')
-		write_len = ft_printf_di(ap, write_len);
-	else if (*format == 'u')
-		write_len = ft_printf_u(ap, write_len);
-	else if (*format == 'x')
-		write_len = ft_printf_lower_x(ap, write_len);
-	else if (*format == 'X')
-		write_len = ft_printf_upper_x(ap, write_len);
-	else if (*format == '%')
-		write_len = ft_printf_percent(write_len);
-	return (write_len);
+	if (*ptr == 'd' || *ptr == 'i' || *ptr == 'u')
+	{
+		if (*ptr == 'u')
+			return (ft_d(va_arg(ap, unsigned int)));
+		else
+			return (ft_d(va_arg(ap, int)));
+	}
+	else if (*ptr == 'x' || *ptr == 'X' || *ptr == 'p')
+	{
+		if (*ptr == 'x' || *ptr == 'X')
+			return (ft_hex(va_arg(ap, unsigned int), ptr));
+		else
+			return (ft_pointer(va_arg(ap, unsigned long int)));
+	}
+	else if (*ptr == 'c')
+		return (ft_char(va_arg(ap, int)));
+	else if (*ptr == 's')
+		return (ft_string(va_arg(ap, char *)));
+	else if (*ptr == '%')
+	{
+		write(1, ptr, 1);
+		return (1);
+	}
+	return (0);
 }
 
-int ft_printf(const char *fmt, ...)
+int	ft_printf(const char *fmt, ...)
 {
-	va_list ap;
-	int c;
-	int num;
+	va_list	ap;
+	int		c;
+	int		num;
 
 	c = -1;
 	num = 0;
 	va_start(ap, fmt);
-	while (format[++c])
+	while (fmt[++c])
 	{
 		if (fmt[c] == '%')
 		{
 			c += 1;
 			num += ft_flags(&fmt[c], ap);
 		}
-		else 
+		else
 		{
 			write(1, &fmt[c], 1);
 			num++;

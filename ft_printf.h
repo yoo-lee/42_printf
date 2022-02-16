@@ -14,7 +14,7 @@
 char	*ft_itoa(long int n);
 void	ft_putstr_fd(char *s, int fd);
 size_t	ft_strlen(const char *s);
-int		ft_decimal(unsigned long int num);
+int		ft_d(unsigned long int num);
 size_t	ft_string(const char *c);
 size_t	ft_char(const int c);
 int		ft_hex(unsigned int num, const char *type);
