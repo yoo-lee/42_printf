@@ -1,27 +1,29 @@
-NAME = libftprintf.a
+NAME=libftprintf.a
 
-SRCS = 	ft_printf.c \
-		helpers/ft_putchar.c \
-		helpers/ft_putchar_fd.c \
-		
-OBJECTS = ft_printf.o \
-		helpers/ft_putchar.o \
-		helpers/ft_putchar_fd.o \
+CC=clang
 
-INCLUDES = ft_printf.h
+CFLAGS=-Wall -Wextra -Werror
+
+SRC= ft_printf.c ft_char.c ft_d.c ft_hex.c \
+ft_pointer.c ft_printf.c ft_string.c ft_utility.c
+
+RM=rm -f
+
+OBJ=$(SRC:.c=.o)
+
+$(NAME): ft_printf.h
+	$(CC) $(CFLAGS) -c $(SRC)
+	ar rc $(NAME) $(OBJ)
+	ranlib $(NAME)
 
 all: $(NAME)
 
-$(NAME): $(OBJECTS)
-
-$(OBJECTS): $(SRCS) $(INCLUDES)
-	@gcc -Wextra -Werror -Wall -c $(SRCS)
-	@ar rcs $(NAME) $(OBJECTS)
-
 clean:
-	rm -rf $(OBJECTS)
-	
+	$(RM) $(OBJ)
+
 fclean: clean
-	rm -rf $(NAME)
+	$(RM) $(NAME)
 
 re: fclean all
+
+.PHONY: clean fclean
