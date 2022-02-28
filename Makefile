@@ -1,6 +1,6 @@
 NAME=libftprintf.a
 
-CC=clang
+CC=gcc
 
 CFLAGS=-Wall -Wextra -Werror
 
@@ -13,9 +13,8 @@ OBJ=$(SRC:.c=.o)
 
 $(NAME): ft_printf.h
 	$(CC) $(CFLAGS) -c $(SRC)
-	ar rc $(NAME) $(OBJ)
-	ranlib $(NAME)
-
+	ar rcs $(NAME) $(OBJ)
+	
 all: $(NAME)
 
 clean:
