@@ -31,6 +31,6 @@ size_t	ft_string(const char *c);
 size_t	ft_char(const int c);
 int		ft_hex(unsigned int num, const char *type);
 int		ft_pointer(unsigned long int num);
-int		ft_printf(const char *format, ...);
+int		ft_printf(const char *fmt, ...);
 
 #endif
