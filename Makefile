@@ -4,7 +4,7 @@ CC=gcc
 
 CFLAGS=-Wall -Wextra -Werror
 
-SRC= ft_printf.c ft_char.c ft_d.c ft_hex.c \
+SRC= ft_printf.c ft_d.c ft_hex.c \
 ft_pointer.c ft_printf.c ft_string.c ft_utility.c
 
 RM=rm -f

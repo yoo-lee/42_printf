@@ -58,7 +58,7 @@ char	*ft_itoa(long int n)
 
 void	ft_putstr_fd(char *s, int fd)
 {
-	if (s != NULL)
+	if (!s)
 	{
 		while (*s)
 			write(fd, s++, 1);
@@ -73,4 +73,10 @@ size_t	ft_strlen(const char *s)
 	while (s[i])
 		i++;
 	return (i);
+}
+
+size_t	ft_char(const int c)
+{
+	write (1, &c, 1);
+	return (1);
 }
